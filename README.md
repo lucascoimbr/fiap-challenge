@@ -24,55 +24,20 @@ Instalar máquina EC2 na AWS para utilizar ambiente Linux
 
 #####  Instalando o Kafka
 
-    git clone https://github.com/confluentinc/cp-docker-images
+    git clone https://github.com/lucascoimbr/fiap-challenge.git
 #####  Vá até o diretório do Kafka
-    cd cp-docker-images/examples/kafka-single-node
+    cd fiap-challenge/
 
-Este docker-compose inicializa o Zookeeper e o Kafka:
+Note que há na pasta o arquivo [docker-compose.yml](docker-compose.yml)
 
-    version: '2'
-    services:
-    zookeeper:
-        image: confluentinc/cp-zookeeper:latest
-        network_mode: host
-        environment:
-        ZOOKEEPER_CLIENT_PORT: 32181
-        ZOOKEEPER_TICK_TIME: 2000
-        extra_hosts:
-        - "moby:127.0.0.1"
+##### Executando o docker-compose
 
-    kafka:
-        image: confluentinc/cp-kafka:latest
-        network_mode: host
-        depends_on:
-        - zookeeper
-        environment:
-        KAFKA_BROKER_ID: 1
-        KAFKA_ZOOKEEPER_CONNECT: localhost:32181
-        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092
-        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-        extra_hosts:
-        - "moby:127.0.0.1"
-
-#####  Execute o comando
     docker-compose up -d
-
-#####  Para verificar se está tudo correto:
     docker-compose ps
 
-##### O resultado deve ser como:
+#####  Logs do Zookeeper:
 
-    Name                         Command            State   Ports
-    ----------------------------------------------------------------
-    kafka-single-node_kafka_1       /etc/confluent/docker/run   Up
-    kafka-single-node_zookeeper_1   /etc/confluent/docker/run   Up
-
-#####  Para verificar o log do zookeeper:
     docker-compose logs zookeeper | grep -i binding
-
-#####  Resultado esperado:
-
-    zookeeper_1  | [2018-06-26 01:06:59,447] INFO binding to port 0.0.0.0/0.0.0.0:32181 (org.apache.zookeeper.server.NIOServerCnxnFactory)
 
 #####  Analisar a saúde do Kafka:
 
@@ -89,3 +54,6 @@ Este docker-compose inicializa o Zookeeper e o Kafka:
 ####  Testando o Kafka
 
 #####  Criando um Topic
+
+    docker-compose exec kafka  \
+    kafka-topics --create --topic meu-topico-legal --partitions 1 --replication-factor 1 --if-not-exists --zookeeper localhost:32181
