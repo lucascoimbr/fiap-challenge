@@ -7,8 +7,8 @@ Instalar máquina EC2 na AWS para utilizar ambiente Linux
 - Como usar máquina EC2 com SSH
     - Baixar o arquivo .pem
     - Vá até o diretório em que se encontra o .pem
-    - chmod 400 challengefiap.pem
-    - ssh -i "challengefiap.pem" ec2-user@ec2-3-91-144-144.compute-1.amazonaws.com
+    - chmod 400 challengefiap1.pem
+    - ssh -i "challangefiap1.pem" ec2-user@ec2-44-202-75-248.compute-1.amazonaws.com
 ##  Instalando o Docker, Docker Compose e Git
     sudo yum update -y
     sudo amazon-linux-extras install docker
@@ -54,6 +54,7 @@ Note que há na pasta o arquivo [docker-compose.yml](docker-compose.yml)
 ####  Testando o Kafka
 
 #####  Criando um Topic
+
 
     docker-compose exec kafka  \
     kafka-topics --create --topic meu-topico-legal --partitions 1 --replication-factor 1 --if-not-exists --zookeeper localhost:32181
