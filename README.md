@@ -35,6 +35,16 @@ Note que há na pasta o arquivo [docker-compose.yml](docker-compose.yml)
     docker-compose up -d
     docker-compose ps
 
+Caso ocorra o erro abaixo:
+
+    Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+Utilize a linha de código:
+
+    sudo dockerd
+
+    
+
 #####  Logs do Zookeeper:
 
     docker-compose logs zookeeper | grep -i binding
@@ -55,12 +65,9 @@ Note que há na pasta o arquivo [docker-compose.yml](docker-compose.yml)
 
 #####  Criando um Topic
 
+    docker-compose exec kafka  \
+    kafka-topics --bootstrap-server ec2-44-202-75-248.compute-1.amazonaws.com:9092 --topic meu-topico-legal --create --partitions 1 --replication-factor 1
+#####  Verificando se o tópico foi criado
 
     docker-compose exec kafka  \
-    kafka-topics --create --topic meu-topico-legal --partitions 1 --replication-factor 1 --if-not-exists --zookeeper localhost:32181
-
-    docker-compose exec kafka  \
-    kafka-topics --bootstrap-server localhost:9092 --topic meu-topico-legal --create --partitions 1 --replication-factor 1
-
-    
-
+    kafka-topics  --bootstrap-server=localhost:9092 --describe --topic users
