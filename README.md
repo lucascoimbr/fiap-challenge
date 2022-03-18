@@ -8,10 +8,11 @@ Tutorial de como montar a máquina: https://www.youtube.com/watch?v=f3jaO-wmQtA
 - Como usar máquina EC2 com SSH
     - Baixar o arquivo .pem
     - Vá até o diretório em que se encontra o .pem
-    - chmod 400 challengefiap1.pem
+    - chmod 400 challangefiap1.pem
     -  ssh -i "challangefiap1.pem" ubuntu@ec2-35-175-145-34.compute-1.amazonaws.com
 ##  Instalando o Docker, Docker Compose e Git
     sudo apt update
+    sudo apt install virtualenv
     sudo apt install default-jdk
     sudo wget https://packages.confluent.io/archive/5.5/confluent-5.5.0-2.12.tar.gz
     tar xvzf confluent-5.5.0-2.12.tar.gz
@@ -48,13 +49,22 @@ Como, no momento da criação da máquina EC2, foi adicionada uma regra de segur
 
     kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092
 
-    kafka-topics --delete --topic quickstart-events --bootstrap-server localhost:9092
-
-Verificar se o tópicofoi criado:
+##### Verificar se o tópicofoi criado:
 
     kafka-topics --describe --topic quickstart-events --bootstrap-server localhost:9092
 
-Mandar mensagens para o tópico
+##### Mandar mensagens para o tópico (Producer)
 
-    docker-compose exec kafka  \
-    bash -c "seq 100 | kafka-console-producer --request-required-acks 1 --broker-list localhost:29092 --topic meu-topico-legal && echo 'Produced 100 messages.'"
+    kafka-console-producer --topic quickstart-events --bootstrap-server localhost:9092
+
+Para sair, basta apertar ctrl + C
+
+##### Ler os eventos (Consumer)
+
+    kafka-console-consumer --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+
+#### Configurar producers (Python)
+
+    virtualenv -p python3 .env3
+    source .env3/bin/activate
+    pip install kafka-python
