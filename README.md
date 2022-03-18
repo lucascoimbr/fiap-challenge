@@ -10,6 +10,10 @@ Tutorial de como montar a máquina: https://www.youtube.com/watch?v=f3jaO-wmQtA
     - Vá até o diretório em que se encontra o .pem
     - chmod 400 challangefiap1.pem
     -  ssh -i "challangefiap1.pem" ubuntu@ec2-35-175-145-34.compute-1.amazonaws.com
+
+##  Baixando o repositório git na máquina EC2
+
+    git clone https://github.com/lucascoimbr/fiap-challenge.git
 ##  Instalando o Docker, Docker Compose e Git
     sudo apt update
     sudo apt install virtualenv
