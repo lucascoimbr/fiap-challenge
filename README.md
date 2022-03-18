@@ -14,9 +14,13 @@ Tutorial de como montar a máquina: https://www.youtube.com/watch?v=f3jaO-wmQtA
 ##  Baixando o repositório git na máquina EC2
 
     git clone https://github.com/lucascoimbr/fiap-challenge.git
-##  Instalando o Docker, Docker Compose e Git
+##  Instalando as dependências necessárias
     sudo apt update
     sudo apt install virtualenv
+    sudo apt-get install nodejs-dev node-gyp 
+    npm install no-kafka
+    libssl1.0-dev
+    sudo apt install npm
     sudo apt install default-jdk
     sudo wget https://packages.confluent.io/archive/5.5/confluent-5.5.0-2.12.tar.gz
     tar xvzf confluent-5.5.0-2.12.tar.gz
@@ -72,3 +76,7 @@ Para sair, basta apertar ctrl + C
     virtualenv -p python3 .env3
     source .env3/bin/activate
     pip install kafka-python
+
+Criar o tópico
+
+    kafka-topics --create --topic kafka-python-topic --bootstrap-server localhost:9092
