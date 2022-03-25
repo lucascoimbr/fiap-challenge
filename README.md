@@ -83,4 +83,14 @@ Verifique se está executando
     docker-compose exec kafka  \
     kafka-console-consumer --bootstrap-server localhost:29092 --topic meu-topico --from-beginning --max-messages 100
 
+##### Conectar ao AWS EC3
 
+    curl -X POST ec2-44-202-5-136.compute-1.amazonaws.com:8083/connectors/ \
+    -H 'Content-Type: application/json' \
+    -d '{ "name":"kafka-to-s3", "config":{ "connector.class":"io.confluent.connect.s3.S3SinkConnector", "tasks.max":"1", "topics":"hmv-answers", "s3.bucket.name":"fiapchallenge", "s3.region":"us-east-1", "key.converter":"org.apache.kafka.connect.json.JsonConverter", "key.converter.schemas.enable":"false", "value.converter":"org.apache.kafka.connect.json.JsonConverter", "value.converter.schemas.enable":"false", "storage.class":"io.confluent.connect.s3.storage.S3Storage", "format.class":"io.confluent.connect.s3.format.json.JsonFormat", "schema.compatibility":"NONE", "partitioner.class":"io.confluent.connect.storage.partitioner.DefaultPartitioner", "locale":"en", "timezone":"UTC", "aws.access.key.id":"", "aws.secret.access.key":"", "errors.tolerance":"all", "flush.size":"10" } }'
+##### Verificar se o conector foi criado
+
+    curl GET ec2-44-202-5-136.compute-1.amazonaws.com:8083/connectors
+
+##### Verifique se o connector está recebendo os dados
+    docker-compose logs connect
