@@ -83,7 +83,7 @@ Verifique se está executando
     docker-compose exec kafka  \
     kafka-console-consumer --bootstrap-server localhost:29092 --topic meu-topico --from-beginning --max-messages 100
 
-##### Conectar ao AWS EC3
+##### Conectar ao AWS S3
 
     curl -X POST ec2-44-202-5-136.compute-1.amazonaws.com:8083/connectors/ \
     -H 'Content-Type: application/json' \
