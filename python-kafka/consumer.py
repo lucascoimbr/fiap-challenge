@@ -21,7 +21,6 @@ def consume_events():
     for records in consumer:
         print(records)
 
-
 if __name__ == '__main__':
     print("Consumer working!")
     consume_events()

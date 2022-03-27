@@ -7,9 +7,20 @@ as
 with init_table as (
 select
     id
-    , customer_id 
-    , field
-    , value
+    , "protocol"
+    , "queryResult.allRequiredParamsPresent"
+    , "queryResult.fulfillmentMessages"
+    , "queryResult.fulfillmentText"
+    , "queryResult.intent.displayName"
+    , "queryResult.intent.name"
+    , "queryResult.intentDetectionConfidence"
+    , "queryResult.languageCode"
+    , "queryResult.outputContexts"
+    , "queryResult.parameters.location"
+    , "queryResult.parameters.url"
+    , "queryText"
+    , "responseId"
+    , "customer_id" 
     , "metadata.timestamp"
 from
 chatbot.answers
