@@ -20,19 +20,28 @@ def _produce_event():
     """
     # UUID produces a universally unique identifier
     return {
-            "data": {'event_id': str(uuid.uuid4()),
-                     'event_datetime': datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),
-                     'message': 'message-sent'
-                     },
-            "metadata": {
-                "timestamp": datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),
-                "record-type": "data",
-                "operation": "update",
-                "partition-key-type": "schema-table",
-                "schema-name": "client",
-                "table-name": "chatbot-answers",
-                "transaction-id": str(uuid.uuid4())[0:5],
-            }
+            "Body":
+{
+  "protocol":"1247620220319T182215916649",
+  "queryResult": {
+      "allRequiredParamsPresent": "true",
+      "fulfillmentMessages": "teste",
+      "fulfillmentText": "Poderia informar seu CPF ou Número do Convenio?",
+      "intent": {
+          "displayName": "gostaria de ajuda",
+          "name": "projects/newagent-uc9l/agent/intents/ae6c62e4-a8bf-4615-acbf-c104802d2002"
+      },
+      "intentDetectionConfidence": "0.4426844",
+      "languageCode": "pt-br",
+      "parameters": {
+          "location": "",
+          "url": ""
+      },
+      "queryText": "estou come duvidas sobre agendamento de consultas"
+  },
+  "responseId": "g6e6c10e-5a35-4809-9883-773437533ff9-40ef389b"
+}
+
         }
 
 def send_events():
